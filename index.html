@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veknmo</title>
+
+    <!-- Google Fonts for modern typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #0c0c0c;
+            --text-color: #f0f0f0;
+            --accent-color: #C0FF00;
+            /* Lime Green */
+            --accent-glow: rgba(192, 255, 0, 0.4);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.05);
+            --panel-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Lenis Recommended CSS */
+        html.lenis,
+        html.lenis body {
+            height: auto;
+        }
+
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+
+        .lenis.lenis-smooth iframe {
+            pointer-events: none;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Background Typography Animation */
+        .background-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            overflow: hidden;
+            pointer-events: none;
+            opacity: 0.15;
+            user-select: none;
+        }
+
+        .bg-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 14vw;
+            font-weight: 700;
+            line-height: 0.85;
+            white-space: nowrap;
+            color: transparent;
+            -webkit-text-stroke: 1px var(--text-color);
+        }
+
+        .bg-text.accent {
+            color: var(--text-color);
+            -webkit-text-stroke: 0;
+            opacity: 0.3;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1;
+        }
+
+        .hero h1 span {
+            color: var(--accent-color);
+        }
+
+        .hero p {
+            color: #888;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 1.5rem auto 0;
+            font-weight: 300;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0.5;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator span {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .scroll-indicator .line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--text-color), transparent);
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translate(-50%, 0);
+            }
+
+            40% {
+                transform: translate(-50%, -10px);
+            }
+
+            60% {
+                transform: translate(-50%, -5px);
+            }
+        }
+
+        /* Glassmorphism Panels */
+        .section-split {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 4rem 0;
+        }
+
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--panel-shadow);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 4rem;
+        }
+
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+        }
+
+        h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5rem;
+            margin-top: 0;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-transform: uppercase;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        /* Form Elements */
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .controls {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            color: #999;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        select,
+        input {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 1rem 1.2rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: all 0.3s ease;
+            appearance: none;
+        }
+
+        select:focus,
+        input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px var(--accent-glow);
+        }
+
+        .select-wrapper {
+            position: relative;
+        }
+
+        .select-wrapper::after {
+            content: '▼';
+            font-size: 0.8rem;
+            position: absolute;
+            right: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: #888;
+        }
+
+        select {
+            width: 100%;
+        }
+
+        /* Stats Display */
+        .stats-container {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            flex: 1;
+            min-width: 200px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+            border-color: rgba(192, 255, 0, 0.2);
+        }
+
+        .stat-label {
+            color: #888;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-val-wrap {
+            display: flex;
+            align-items: baseline;
+            gap: 0.25rem;
+        }
+
+        .stat-value {
+            font-family: 'Oswald', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--text-color);
+            line-height: 1;
+            transition: color 0.3s ease;
+        }
+
+        .stat-value.active {
+            color: var(--accent-color);
+            text-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .stat-unit {
+            font-size: 1.2rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1.2rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: 0.6s;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            transform: translateX(100%);
+        }
+
+        .btn:active {
+            transform: scale(0.96);
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: #000;
+            box-shadow: 0 10px 20px rgba(192, 255, 0, 0.15);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 15px 30px rgba(192, 255, 0, 0.3);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-color);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-danger {
+            background-color: transparent;
+            color: #ff4d4d;
+            border: 1px solid rgba(255, 77, 77, 0.3);
+        }
+
+        .btn-danger:hover {
+            background-color: rgba(255, 77, 77, 0.1);
+            border-color: #ff4d4d;
+        }
+
+        /* Simulator specific */
+        .helper-text {
+            font-size: 0.85rem;
+            color: #777;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .pulse-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            margin-right: 10px;
+            display: none;
+        }
+
+        .is-simulating .pulse-indicator {
+            display: inline-block;
+            animation: simPulse 1s infinite alternate;
+        }
+
+        @keyframes simPulse {
+            0% {
+                transform: scale(0.8);
+                box-shadow: 0 0 0 0 var(--accent-glow);
+            }
+
+            100% {
+                transform: scale(1.2);
+                box-shadow: 0 0 10px 4px var(--accent-glow);
+            }
+        }
+
+        .simulating-title {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Background Typography Parallax -->
+    <div class="background-wrapper">
+        <div class="bg-text row-1">VEKNMO VEKNMO VEKNMO VEKNMO</div>
+        <div class="bg-text accent row-2">SPEED SPEED SPEED SPEED</div>
+        <div class="bg-text row-3">GHOST GHOST GHOST GHOST</div>
+        <div class="bg-text accent row-4">VEKNMO VEKNMO VEKNMO VEKNMO</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1 class="hero-title">Vekn<span>mo</span></h1>
+            <p class="hero-subtitle">Phasmophobia Ghost Speed & Footstep Simulation Tool</p>
+
+            <div class="scroll-indicator">
+                <span>Scroll</span>
+                <div class="line"></div>
+            </div>
+        </div>
+
+        <div class="section-split">
+            <!-- Ghost Speed Analyzer Panel -->
+            <div class="glass-panel gs-panel">
+                <h2>BPM Analyzer</h2>
+
+                <div class="controls">
+                    <div class="input-group">
+                        <label for="speedModifier">Ghost Speed Modifier</label>
+                        <div class="select-wrapper">
+                            <select id="speedModifier">
+                                <option value="0">50%</option>
+                                <option value="1">75%</option>
+                                <option value="2" selected>100%</option>
+                                <option value="3">125%</option>
+                                <option value="4">150%</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-primary" id="tap">Tap (Space)</button>
+                    <button class="btn btn-outline" id="reset">Reset</button>
+                </div>
+
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <span class="stat-label">Calculated BPM</span>
+                        <div class="stat-val-wrap">
+                            <span class="stat-value" id="bpm">0</span>
+                        </div>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Estimated Speed</span>
+                        <div class="stat-val-wrap">
+                            <span class="stat-value" id="speed">0</span>
+                            <span class="stat-unit">m/s</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footstep Simulator Panel -->
+            <div class="glass-panel gs-panel" id="simulator-section">
+                <div class="simulating-title">
+                    <div class="pulse-indicator"></div>
+                    <h2>Footstep Simulator</h2>
+                </div>
+
+                <div class="helper-text">
+                    <strong>Note:</strong> 1.7 m/s is the regular ghost speed at 100% ghost speed modifier. (125% = 2.1
+                    m/s, 150% = 2.5 m/s).
+                </div>
+
+                <div class="controls">
+                    <div class="input-group">
+                        <label for="simSpeed">Target Speed (m/s)</label>
+                        <input type="number" id="simSpeed" value="1.7" step="0.1" min="0">
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-primary" id="simulate">Start Simulation</button>
+                    <button class="btn btn-danger" id="stop">Stop</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+
+    <script>
+        // --- 1. UI Animations & Smooth Scroll ---
+
+        // Initialize Lenis for smooth scrolling
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+            infinite: false,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // Connect Lenis to GSAP ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
+
+        // GSAP Animations
+
+        // Initial load animation
+        const tlLoad = gsap.timeline();
+        tlLoad.from('.hero-title', { y: 50, opacity: 0, duration: 1, ease: 'power3.out' })
+            .from('.hero-subtitle', { y: 20, opacity: 0, duration: 1, ease: 'power3.out' }, '-=0.6')
+            .from('.scroll-indicator', { opacity: 0, duration: 1 }, '-=0.4');
+
+        // Background parallax scrolling
+        gsap.to('.row-1', {
+            x: '-10%',
+            ease: 'none',
+            scrollTrigger: { trigger: 'body', start: 'top top', end: 'bottom bottom', scrub: 1 }
+        });
+        gsap.to('.row-2', {
+            x: '10%',
+            ease: 'none',
+            scrollTrigger: { trigger: 'body', start: 'top top', end: 'bottom bottom', scrub: 1 }
+        });
+        gsap.to('.row-3', {
+            x: '-15%',
+            ease: 'none',
+            scrollTrigger: { trigger: 'body', start: 'top top', end: 'bottom bottom', scrub: 1 }
+        });
+        gsap.to('.row-4', {
+            x: '5%',
+            ease: 'none',
+            scrollTrigger: { trigger: 'body', start: 'top top', end: 'bottom bottom', scrub: 1 }
+        });
+
+        // Panel reveal on scroll
+        gsap.utils.toArray('.gs-panel').forEach(panel => {
+            gsap.fromTo(panel,
+                { y: 100, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: panel,
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        });
+
+
+        // --- 2. Core Logic ---
+
+        let taps = [];
+        const modifiers = [0.5, 0.75, 1.0, 1.25, 1.5];
+
+        function getModifier() {
+            return modifiers[document.getElementById("speedModifier").value];
+        }
+
+        function bpmToSpeed(bpm) {
+            const mod = getModifier();
+            return bpm / (mod * (60 + bpm * 0.095));
+        }
+
+        function speedToBpm(speed) {
+            const mod = getModifier();
+            const C = 0.095;
+            return (speed * mod * 60) / (1 - speed * mod * C);
+        }
+
+        function animateValueUpdate(elementId) {
+            const el = document.getElementById(elementId);
+            el.classList.add('active');
+            setTimeout(() => el.classList.remove('active'), 300);
+        }
+
+        function tap() {
+            const now = Date.now();
+            taps.push(now);
+
+            // Button visual feedback
+            const tapBtn = document.getElementById('tap');
+            gsap.fromTo(tapBtn, { scale: 0.95 }, { scale: 1, duration: 0.2, ease: "back.out(2)" });
+
+            if (taps.length > 20) taps.shift();
+
+            if (taps.length >= 2) {
+                let intervals = [];
+                for (let i = 1; i < taps.length; i++) {
+                    intervals.push(taps[i] - taps[i - 1]);
+                }
+
+                let avg = intervals.reduce((a, b) => a + b) / intervals.length;
+                let bpm = 60000 / avg;
+                let speed = bpmToSpeed(bpm);
+
+                document.getElementById("bpm").innerText = bpm.toFixed(1);
+                document.getElementById("speed").innerText = speed.toFixed(2);
+
+                animateValueUpdate('bpm');
+                animateValueUpdate('speed');
+            }
+        }
+
+        document.getElementById("tap").onclick = tap;
+
+        document.addEventListener("keydown", e => {
+            if (e.code === "Space" && e.target.tagName !== 'INPUT') {
+                e.preventDefault(); // Prevent page scroll when tapping
+                tap();
+            }
+        });
+
+        document.getElementById("reset").onclick = () => {
+            taps = [];
+            document.getElementById("bpm").innerText = "0";
+            document.getElementById("speed").innerText = "0";
+
+            // GSAP feedback
+            const resetBtn = document.getElementById('reset');
+            gsap.fromTo(resetBtn, { scale: 0.9 }, { scale: 1, duration: 0.3, ease: "power2.out" });
+        };
+
+        // Simulator
+        // If the asset is missing, ignore throwing errors
+        let audio;
+        try {
+            audio = new Audio("./assets/footstep.mp3");
+        } catch (e) { }
+
+        function playStep() {
+            if (audio) {
+                const step = audio.cloneNode();
+                step.play().catch(e => console.log("Audio playback requires user interaction first, or asset is missing."));
+            }
+        }
+
+        let stepTimer = null;
+        const simulatorSection = document.getElementById('simulator-section');
+
+        function simulate(speed) {
+            const bpm = speedToBpm(speed);
+            const interval = 60000 / bpm;
+
+            clearTimeout(stepTimer);
+            simulatorSection.classList.add('is-simulating');
+
+            function loop() {
+                playStep();
+                stepTimer = setTimeout(loop, interval);
+            }
+
+            loop();
+        }
+
+        function stopSimulation() {
+            clearTimeout(stepTimer);
+            simulatorSection.classList.remove('is-simulating');
+        }
+
+        document.getElementById("simulate").onclick = () => {
+            let speed = parseFloat(document.getElementById("simSpeed").value);
+            if (speed > 0) {
+                simulate(speed);
+            }
+
+            const simBtn = document.getElementById('simulate');
+            gsap.fromTo(simBtn, { scale: 0.95 }, { scale: 1, duration: 0.2, ease: "back.out(2)" });
+        };
+
+        document.getElementById("stop").onclick = () => {
+            stopSimulation();
+            const stopBtn = document.getElementById('stop');
+            gsap.fromTo(stopBtn, { scale: 0.95 }, { scale: 1, duration: 0.2, ease: "back.out(2)" });
+        };
+
+    </script>
+</body>
+
+</html>
