@@ -432,12 +432,15 @@ select {
 }
 
 .stat-val-wrap {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: baseline;
-    gap: 0.25rem;
+    width: 100%;
 }
 
 .stat-value {
+    grid-column: 2;
+    text-align: center;
     font-family: 'Oswald', sans-serif;
     font-size: 3rem;
     font-weight: 700;
@@ -458,6 +461,8 @@ select {
 }
 
 .stat-unit {
+    grid-column: 3;
+    padding-left: 0.25rem;
     font-size: 1rem;
     color: #666;
     font-weight: 500;

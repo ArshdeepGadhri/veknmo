@@ -334,24 +334,31 @@
         }
 
         let stepTimer = null;
+        let isSimulating = false;
+        let currentInterval = 1000;
         const simulatorSection = document.getElementById('simulator-section');
+
+        function loop() {
+            if (!isSimulating) return;
+            playStep();
+            stepTimer = setTimeout(loop, currentInterval);
+        }
 
         function simulate(speed) {
             const bpm = speedToBpm(speed);
-            const interval = 60000 / bpm;
+            currentInterval = 60000 / bpm;
 
-            clearTimeout(stepTimer);
+            if (isSimulating) return;
+
+            isSimulating = true;
             simulatorSection.classList.add('is-simulating');
 
-            function loop() {
-                playStep();
-                stepTimer = setTimeout(loop, interval);
-            }
-
+            clearTimeout(stepTimer);
             loop();
         }
 
         function stopSimulation() {
+            isSimulating = false;
             clearTimeout(stepTimer);
             simulatorSection.classList.remove('is-simulating');
         }
