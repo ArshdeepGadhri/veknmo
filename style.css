@@ -594,12 +594,6 @@ select {
 }
 
 .is-simulating h2::before {
-    content: '';
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-right: 10px;
     background-color: #ff4d4d;
     box-shadow: 0 0 10px rgba(255, 77, 77, 0.4);
     animation: simPulseRed 0.8s infinite alternate;
