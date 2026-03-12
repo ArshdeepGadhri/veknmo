@@ -1,6 +1,6 @@
 # Veknmo: Phasmophobia Ghost Speed Tool
 
-Veknmo is a beautiful, performant tool built for identifying and simulating ghost speeds in the game **Phasmophobia**. Built as a single-file static web application, it combines utility with a modern, glassmorphic dark-mode aesthetic. You can find a live working version of the tool [here](https://).
+Veknmo is a beautiful, performant tool built for identifying and simulating ghost speeds in the game **Phasmophobia**. Built as a single-file static web application, it combines utility with a modern, glassmorphic dark-mode aesthetic. You can find a live working version of the tool [here](https://veknmo.vercel.app/).
 
 ## Features
 
