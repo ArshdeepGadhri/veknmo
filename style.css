@@ -213,7 +213,7 @@ body {
     padding: 1.5rem;
     box-shadow: var(--panel-shadow);
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; Removed to prevent tooltip clipping */
     margin-bottom: 2rem;
 }
 
@@ -337,6 +337,16 @@ select:focus,
 input:focus {
     border-color: var(--accent-color);
     box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+/* Hide up/down arrows on number inputs */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+input[type=number] {
+    -moz-appearance: textfield;
 }
 
 .select-wrapper {
@@ -614,4 +624,73 @@ select {
         transform: scale(1.2);
         box-shadow: 0 0 12px 6px rgba(255, 77, 77, 0.4);
     }
+}
+
+/* Tooltips */
+.tooltip-wrapper {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 10;
+}
+
+@media (min-width: 768px) {
+    .tooltip-wrapper {
+        top: 3rem;
+        right: 3rem;
+    }
+}
+
+.tooltip-icon {
+    width: 24px;
+    height: 24px;
+    color: #555;
+    cursor: help;
+    transition: color 0.3s ease;
+}
+
+.tooltip-icon:hover {
+    color: var(--accent-color);
+}
+
+.tooltip-content {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: -8px;
+    width: max-content;
+    max-width: 250px;
+    background: rgba(15, 15, 15, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: #ccc;
+    line-height: 1.5;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    pointer-events: none;
+    font-family: 'Inter', sans-serif;
+    text-align: left;
+}
+
+.tooltip-wrapper:hover .tooltip-content {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.tooltip-content::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    right: 15px;
+    width: 10px;
+    height: 10px;
+    background: rgba(15, 15, 15, 0.95);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    transform: rotate(45deg);
 }

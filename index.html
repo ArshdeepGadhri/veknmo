@@ -55,12 +55,12 @@
         <div class="bg-text row-3 mobile-only">VEKNMO VEKNMO VEKNMO VEKNMO</div>
         <div class="bg-text accent row-4 mobile-only">SPEED SPEED SPEED SPEED</div>
         <div class="bg-text row-1 mobile-only">GHOST GHOST GHOST GHOST</div>
-        
+
         <div class="bg-text row-1">VEKNMO VEKNMO VEKNMO VEKNMO</div>
         <div class="bg-text accent row-2">SPEED SPEED SPEED SPEED</div>
         <div class="bg-text row-3">GHOST GHOST GHOST GHOST</div>
         <div class="bg-text accent row-4">VEKNMO VEKNMO VEKNMO VEKNMO</div>
-        
+
         <div class="bg-text row-2 mobile-only">SPEED SPEED SPEED SPEED</div>
         <div class="bg-text accent row-3 mobile-only">GHOST GHOST GHOST GHOST</div>
         <div class="bg-text row-4 mobile-only">VEKNMO VEKNMO VEKNMO VEKNMO</div>
@@ -81,7 +81,7 @@
                 </span>
             </h1>
             <p class="hero-subtitle">Phasmophobia Ghost Speed & Footstep Simulation Tool</p>
-            
+
             <div class="scroll-indicator">
                 <span>Scroll Down</span>
                 <div class="line"></div>
@@ -91,6 +91,19 @@
         <div class="section-split">
             <!-- Ghost Speed Analyzer Panel -->
             <div class="glass-panel gs-panel">
+                <div class="tooltip-wrapper">
+                    <svg class="tooltip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    <div class="tooltip-content">
+                        Select the ghost speed, then tap the spacebar every time you hear the ghost take a step. After a
+                        few taps, the tool will calculate the ghost's BPM and estimated speed. You can use this
+                        information to match with known ghost speeds.
+                    </div>
+                </div>
                 <h2>BPM Analyzer</h2>
 
                 <div class="controls">
@@ -132,6 +145,20 @@
 
             <!-- Footstep Simulator Panel -->
             <div class="glass-panel gs-panel" id="simulator-section">
+                <div class="tooltip-wrapper">
+                    <svg class="tooltip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    <div class="tooltip-content">
+                        You can use this tool to simulate ghost footsteps at a specific speed. Enter the target speed
+                        (m/s) and click "Start Simulation" to begin. If you are playing at 125% ghost speed modifier,
+                        set the target speed to 2.1 m/s, if the ghost steps in game are faster, you know you are dealing
+                        with a fast ghost.
+                    </div>
+                </div>
                 <h2>Footstep Simulator</h2>
 
                 <div class="helper-text">
@@ -378,6 +405,13 @@
             const stopBtn = document.getElementById('stop');
             gsap.fromTo(stopBtn, { scale: 0.95 }, { scale: 1, duration: 0.2, ease: "back.out(2)" });
         };
+
+        // Stop simulation if target speed is edited while running
+        document.getElementById("simSpeed").addEventListener("input", () => {
+            if (isSimulating) {
+                stopSimulation();
+            }
+        });
 
     </script>
     <script>
