@@ -305,7 +305,7 @@
 
         function tap() {
             haptics.trigger('nudge');
-            
+
             const now = Date.now();
             taps.push(now);
 
@@ -360,7 +360,6 @@
         } catch (e) { }
 
         function playStep() {
-            haptics.trigger('nudge');
             if (audio) {
                 const step = audio.cloneNode();
                 step.play().catch(e => console.log("Audio playback requires user interaction first, or asset is missing."));
