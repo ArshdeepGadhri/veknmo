@@ -44,8 +44,6 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@400;600;700&display=swap"
         rel="stylesheet">
-
-    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
@@ -143,6 +141,29 @@
                 </div>
             </div>
 
+            <!-- Ghost Filter Panel -->
+            <div class="glass-panel gs-panel" id="ghost-filter-section">
+                <div class="tooltip-wrapper">
+                    <svg class="tooltip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    <div class="tooltip-content">
+                        This list automatically filters ghost types based on your estimated speed.
+                        It matches the estimated speed against known ghost speeds with a ±0.3m/s margin.
+                        Ghosts marked with an asterisk (*) have varying speeds depending on conditions (e.g. Line of
+                        Sight, Temperature).
+                    </div>
+                </div>
+                <h2>Possible Ghosts</h2>
+                <div class="ghost-filter-container" id="ghost-list">
+                    <!-- <div class="helper-text" style="text-align: center; margin-bottom: 0;">Tap to calculate BPM and
+                        filter ghosts.</div> -->
+                </div>
+            </div>
+
             <!-- Footstep Simulator Panel -->
             <div class="glass-panel gs-panel" id="simulator-section">
                 <div class="tooltip-wrapper">
@@ -176,29 +197,6 @@
                 <div class="btn-group">
                     <button class="btn btn-primary" id="simulate">Start Simulation</button>
                     <button class="btn btn-danger" id="stop">Stop</button>
-                </div>
-            </div>
-
-            <!-- Ghost Filter Panel -->
-            <div class="glass-panel gs-panel" id="ghost-filter-section">
-                <div class="tooltip-wrapper">
-                    <svg class="tooltip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                    </svg>
-                    <div class="tooltip-content">
-                        This list automatically filters ghost types based on your estimated speed.
-                        It matches the estimated speed against known ghost speeds with a ±0.3m/s margin.
-                        Ghosts marked with an asterisk (*) have varying speeds depending on conditions (e.g. Line of
-                        Sight, Temperature).
-                    </div>
-                </div>
-                <h2>Possible Ghosts</h2>
-                <div class="ghost-filter-container" id="ghost-list">
-                    <!-- <div class="helper-text" style="text-align: center; margin-bottom: 0;">Tap to calculate BPM and
-                        filter ghosts.</div> -->
                 </div>
             </div>
         </div>

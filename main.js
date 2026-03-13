@@ -1,3 +1,4 @@
+import './style.css';
 import { WebHaptics } from 'web-haptics';
 import footstepAudioUrl from './assets/footstep.mp3';
 const haptics = new WebHaptics();
