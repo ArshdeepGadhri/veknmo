@@ -188,6 +188,7 @@
 
     <script type="module">
         import { WebHaptics } from 'web-haptics';
+        import footstepAudioUrl from './assets/footstep.mp3';
         const haptics = new WebHaptics();
 
         // --- 1. UI Animations & Smooth Scroll ---
@@ -355,10 +356,11 @@
         // If the asset is missing, ignore throwing errors
         let audio;
         try {
-            audio = new Audio("./assets/footstep.mp3");
+            audio = new Audio(footstepAudioUrl);
         } catch (e) { }
 
         function playStep() {
+            haptics.trigger('nudge');
             if (audio) {
                 const step = audio.cloneNode();
                 step.play().catch(e => console.log("Audio playback requires user interaction first, or asset is missing."));
