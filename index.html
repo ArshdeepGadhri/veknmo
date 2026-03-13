@@ -186,7 +186,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
 
-    <script>
+    <script type="module">
+        import { WebHaptics } from 'web-haptics';
+        const haptics = new WebHaptics();
+
         // --- 1. UI Animations & Smooth Scroll ---
 
         // Initialize Lenis for smooth scrolling
@@ -300,6 +303,8 @@
         }
 
         function tap() {
+            haptics.trigger('nudge');
+            
             const now = Date.now();
             taps.push(now);
 
@@ -413,6 +418,16 @@
             }
         });
 
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').then(registration => {
+                    console.log('SW registered: ', registration);
+                }).catch(registrationError => {
+                    console.log('SW registration failed: ', registrationError);
+                });
+            });
+        }
     </script>
     <script>
         window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };

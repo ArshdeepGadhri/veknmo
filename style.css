@@ -57,7 +57,8 @@ body {
     gap: 1.5rem;
     overflow: hidden;
     pointer-events: none;
-    opacity: 0.12; /* slightly dimmer */
+    opacity: 0.12;
+    /* slightly dimmer */
     user-select: none;
 }
 
@@ -70,7 +71,7 @@ body {
     width: 100%;
     height: 100%;
     background: radial-gradient(circle at center, transparent 0%, rgba(5, 5, 5, 0.8) 100%),
-                url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+        url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
     opacity: 0.25;
     mix-blend-mode: overlay;
     z-index: 2;
@@ -360,11 +361,12 @@ input:focus {
 }
 
 /* Hide up/down arrows on number inputs */
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-    -webkit-appearance: none; 
-    margin: 0; 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
+
 input[type=number] {
     -moz-appearance: textfield;
 }
@@ -441,7 +443,7 @@ select {
 
 .stat-box:hover {
     transform: translateY(-5px);
-    border-color: rgba(192, 255, 0, 0.2);
+    border-color: #5df2ff43;
 }
 
 .stat-label {
@@ -492,8 +494,15 @@ select {
 }
 
 @keyframes flicker {
-    0% { opacity: 0.8; text-shadow: 0 0 10px var(--accent-glow); }
-    100% { opacity: 1; text-shadow: 0 0 20px var(--accent-glow), 0 0 40px var(--accent-color); }
+    0% {
+        opacity: 0.8;
+        text-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    100% {
+        opacity: 1;
+        text-shadow: 0 0 20px var(--accent-glow), 0 0 40px var(--accent-color);
+    }
 }
 
 .stat-unit {
@@ -592,7 +601,8 @@ select {
 
 .btn-primary {
     background-color: var(--accent-color);
-    color: #031317; /* Dark tint for contrast */
+    color: #031317;
+    /* Dark tint for contrast */
     box-shadow: 0 5px 20px rgba(93, 242, 255, 0.2), inset 0 0 15px rgba(255, 255, 255, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
