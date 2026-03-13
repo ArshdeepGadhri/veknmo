@@ -178,6 +178,27 @@
                     <button class="btn btn-danger" id="stop">Stop</button>
                 </div>
             </div>
+
+            <!-- Ghost Filter Panel -->
+            <div class="glass-panel gs-panel" id="ghost-filter-section">
+                <div class="tooltip-wrapper">
+                    <svg class="tooltip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    <div class="tooltip-content">
+                        This list automatically filters ghost types based on your estimated speed. 
+                        It matches the estimated speed against known ghost speeds with a ±0.3m/s margin.
+                        Ghosts marked with an asterisk (*) have varying speeds depending on conditions (e.g. Line of Sight, Temperature).
+                    </div>
+                </div>
+                <h2>Possible Ghosts</h2>
+                <div class="ghost-filter-container" id="ghost-list">
+                    <div class="helper-text" style="text-align: center; margin-bottom: 0;">Tap to calculate BPM and filter ghosts.</div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -279,6 +300,34 @@
 
         // --- 2. Core Logic ---
 
+        const ghosts = [
+            { name: "Banshee", speeds: [1.7] },
+            { name: "Dayan", speeds: [1.2, 1.7, 2.25], conditional: true },
+            { name: "Demon", speeds: [1.7] },
+            { name: "Deogen", speeds: [0.4, 3.0], conditional: true },
+            { name: "Gallu", speeds: [1.36, 1.7, 1.96], conditional: true },
+            { name: "Goryo", speeds: [1.7] },
+            { name: "Hantu", speeds: [1.4, 2.7], conditional: true },
+            { name: "Jinn", speeds: [1.7, 2.5], conditional: true },
+            { name: "Mare", speeds: [1.7] },
+            { name: "Moroi", speeds: [1.5, 2.25], conditional: true },
+            { name: "Myling", speeds: [1.7] },
+            { name: "Obake", speeds: [1.7] },
+            { name: "Obambo", speeds: [1.45, 1.96], conditional: true },
+            { name: "Oni", speeds: [1.7] },
+            { name: "Onryo", speeds: [1.7] },
+            { name: "Phantom", speeds: [1.7, 2.5], conditional: true },
+            { name: "Revenant", speeds: [1.0, 3.0], conditional: true },
+            { name: "Shade", speeds: [1.7] },
+            { name: "Spirit", speeds: [1.7] },
+            { name: "Thaye", speeds: [1.0, 2.75], conditional: true },
+            { name: "The Mimic", speeds: [1.7] },
+            { name: "The Twins", speeds: [1.5, 1.9], conditional: true },
+            { name: "Wraith", speeds: [1.7] },
+            { name: "Yokai", speeds: [1.7] },
+            { name: "Yurei", speeds: [1.7] }
+        ];
+
         let taps = [];
         const modifiers = [0.5, 0.75, 1.0, 1.25, 1.5];
 
@@ -301,6 +350,43 @@
             const el = document.getElementById(elementId);
             el.classList.add('active');
             setTimeout(() => el.classList.remove('active'), 300);
+        }
+
+        function updateGhostFilter(estimatedBaseSpeed) {
+            const mod = getModifier();
+            const estimatedActual = estimatedBaseSpeed * mod;
+            const container = document.getElementById('ghost-list');
+            container.innerHTML = '';
+
+            const possibleGhosts = ghosts.filter(ghost => {
+                return ghost.speeds.some(base => {
+                    const actual = base * mod;
+                    return Math.abs(actual - estimatedActual) <= 0.3;
+                });
+            });
+
+            if (possibleGhosts.length === 0) {
+                container.innerHTML = '<div class="helper-text" style="text-align: center; margin-bottom: 0;">No ghosts match this speed.</div>';
+                return;
+            }
+
+            possibleGhosts.forEach(ghost => {
+                const el = document.createElement('div');
+                el.className = 'ghost-item';
+                
+                // Format speeds relative to modifier
+                const speedStrs = ghost.speeds.map(s => (s * mod).toFixed(2) + 'm/s').join(', ');
+                let speedText = `<span class="ghost-speeds">${speedStrs}</span>`;
+                if (ghost.conditional) {
+                    speedText += ' <span class="ghost-conditional" title="Depending on situation">*</span>';
+                }
+
+                el.innerHTML = `
+                    <span class="ghost-name">${ghost.name}</span>
+                    <div class="ghost-speed-wrap">${speedText}</div>
+                `;
+                container.appendChild(el);
+            });
         }
 
         function tap() {
@@ -330,6 +416,8 @@
 
                 animateValueUpdate('bpm');
                 animateValueUpdate('speed');
+
+                updateGhostFilter(speed);
             }
         }
 
@@ -342,10 +430,27 @@
             }
         });
 
+        document.getElementById("speedModifier").addEventListener("change", () => {
+            if (taps.length >= 2) {
+                let intervals = [];
+                for (let i = 1; i < taps.length; i++) {
+                    intervals.push(taps[i] - taps[i - 1]);
+                }
+                let avg = intervals.reduce((a, b) => a + b) / intervals.length;
+                let bpm = 60000 / avg;
+                let speed = bpmToSpeed(bpm);
+
+                document.getElementById("speed").innerText = speed.toFixed(2);
+                animateValueUpdate('speed');
+                updateGhostFilter(speed);
+            }
+        });
+
         document.getElementById("reset").onclick = () => {
             taps = [];
             document.getElementById("bpm").innerText = "0";
             document.getElementById("speed").innerText = "0";
+            document.getElementById("ghost-list").innerHTML = '<div class="helper-text" style="text-align: center; margin-bottom: 0;">Tap to calculate BPM and filter ghosts.</div>';
 
             // GSAP feedback
             const resetBtn = document.getElementById('reset');
@@ -433,7 +538,6 @@
     <script>
         window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
     </script>
-    <script defer src="/<unique-path>/script.js"></script>
 </body>
 
 </html>
