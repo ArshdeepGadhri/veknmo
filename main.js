@@ -1,6 +1,6 @@
 import './style.css';
 import { WebHaptics } from 'web-haptics';
-import footstepAudioUrl from './assets/footstep.mp3';
+import footstepAudioUrl from './assets/footstep.ogg';
 const haptics = new WebHaptics();
 
 // --- 1. UI Animations & Smooth Scroll ---
@@ -249,16 +249,40 @@ document.getElementById("reset").onclick = () => {
 };
 
 // Simulator
-// If the asset is missing, ignore throwing errors
-let audio;
-try {
-    audio = new Audio(footstepAudioUrl);
-} catch (e) { }
+let audioCtx = null;
+let audioBuffer = null;
+
+// Initialize Web Audio API to preload zero-latency audio for mobile
+async function initAudio() {
+    try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        
+        audioCtx = new AudioContext();
+        const response = await fetch(footstepAudioUrl);
+        const arrayBuffer = await response.arrayBuffer();
+        audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+    } catch (e) {
+        console.error("Failed to load or decode audio asset:", e);
+    }
+}
+initAudio();
 
 function playStep() {
-    if (audio) {
-        const step = audio.cloneNode();
-        step.play().catch(e => console.log("Audio playback requires user interaction first, or asset is missing."));
+    if (!audioCtx || !audioBuffer) return;
+    
+    // Resume context if suspended (common on mobile browsers before first interaction)
+    if (audioCtx.state === 'suspended') {
+        audioCtx.resume().catch(e => console.log(e));
+    }
+    
+    try {
+        const source = audioCtx.createBufferSource();
+        source.buffer = audioBuffer;
+        source.connect(audioCtx.destination);
+        source.start(0);
+    } catch (e) {
+        console.log("Audio playback requires user interaction first, or asset is missing.");
     }
 }
 
