@@ -70,25 +70,7 @@ gsap.to('.row-4', {
     scrollTrigger: { trigger: 'body', start: 'top top', end: 'bottom bottom', scrub: 1 }
 });
 
-// Panel reveal on scroll
-gsap.utils.toArray('.gs-panel').forEach(panel => {
-    gsap.fromTo(panel,
-        { y: 100, opacity: 0 },
-        {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: panel,
-                start: 'top 85%',
-                toggleActions: 'play none none reverse'
-            }
-        }
-    );
-});
-
-
+// Removed panel reveal animation because it conflicts with CSS rotate transforms and causes mobile scrolling jank
 // --- 2. Core Logic ---
 
 const ghosts = [
