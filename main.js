@@ -134,7 +134,7 @@ function updateGhostFilter(estimatedBaseSpeed) {
     const possibleGhosts = ghosts.filter(ghost => {
         return ghost.speeds.some(base => {
             const actual = base * mod;
-            return Math.abs(actual - estimatedActual) <= 0.125;
+            return Math.abs(actual - estimatedActual) <= 0.175;
         });
     });
 
@@ -239,7 +239,7 @@ async function initAudio() {
     try {
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         if (!AudioContext) return;
-        
+
         audioCtx = new AudioContext();
         const response = await fetch(footstepAudioUrl);
         const arrayBuffer = await response.arrayBuffer();
@@ -252,12 +252,12 @@ initAudio();
 
 function playStep() {
     if (!audioCtx || !audioBuffer) return;
-    
+
     // Resume context if suspended (common on mobile browsers before first interaction)
     if (audioCtx.state === 'suspended') {
         audioCtx.resume().catch(e => console.log(e));
     }
-    
+
     try {
         const source = audioCtx.createBufferSource();
         source.buffer = audioBuffer;

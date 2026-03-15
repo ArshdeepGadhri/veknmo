@@ -250,6 +250,8 @@ h2 {
     transform: rotate(var(--rotation, 2deg));
     display: inline-block;
     text-align: center;
+    touch-action: manipulation; /* Prevents double-tap zoom on fast tapping */
+    user-select: none; /* Prevents text selection on rapid taps */
 }
 
 .sticky-btn:hover {
