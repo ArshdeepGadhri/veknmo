@@ -239,6 +239,7 @@ h2 {
     border-bottom: 2px dashed rgba(0,0,0,0.5);
     font-size: 1.5rem;
     color: #111;
+    caret-color: #d32f2f; /* Red push-pin color for the cursor so it pops */
     padding: 0.2rem;
     outline: none;
     width: 100%;
