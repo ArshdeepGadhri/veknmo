@@ -1,5 +1,6 @@
 :root {
-    --bg-color: #3b2c21; /* fallback cork color */
+    --bg-color: #3b2c21;
+    /* fallback cork color */
     --text-color: #211c19;
     --paper-bg: #f5f2e6;
     --paper-dark: #e8e3d3;
@@ -7,7 +8,7 @@
     --sticky-yellow: #fdf596;
     --sticky-pink: #fdb4c1;
     --sticky-green: #b9e3b1;
-    
+
     --pin-red: #d32f2f;
     --pin-blue: #1976d2;
     --pin-green: #388e3c;
@@ -44,22 +45,34 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    font-size: 1.3rem; /* Handwritten needs to be slightly larger */
+    font-size: 1.3rem;
+    /* Handwritten needs to be slightly larger */
 }
 
 /* Fonts */
-.handwritten { font-family: 'Caveat', cursive; }
-.marker-font { font-family: 'Permanent Marker', cursive; }
-.typewriter-font { font-family: 'Special Elite', monospace; }
+.handwritten {
+    font-family: 'Caveat', cursive;
+}
+
+.marker-font {
+    font-family: 'Permanent Marker', cursive;
+}
+
+.typewriter-font {
+    font-family: 'Special Elite', monospace;
+}
 
 /* Cork Background Pattern */
 .cork-board-bg {
     position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     z-index: -2;
     background-color: rgb(139, 90, 43);
-    background-image: 
-        radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.6) 100%),
+    background-image:
+        radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.6) 100%),
         url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="1.5" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
     background-blend-mode: multiply;
     opacity: 0.95;
@@ -87,44 +100,47 @@ body {
     background: var(--paper-bg);
     padding: 1.5rem;
     position: relative;
-    box-shadow: 2px 4px 10px rgba(0,0,0,0.4);
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.4);
     transform: rotate(var(--rotation, 0deg));
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 2px 255px 3px 25px / 255px 5px 225px 3px; 
+    border-radius: 2px 255px 3px 25px / 255px 5px 225px 3px;
     margin-bottom: 2rem;
 }
 
 .pinned-card:hover {
     transform: scale(1.02) rotate(var(--rotation, 0deg));
-    box-shadow: 4px 8px 15px rgba(0,0,0,0.5);
+    box-shadow: 4px 8px 15px rgba(0, 0, 0, 0.5);
 }
 
 .notebook-card {
     background: var(--paper-bg);
-    padding: 1.5rem 1.5rem 1.5rem 3.5rem; /* left padding for line */
+    padding: 1.5rem 1.5rem 1.5rem 3.5rem;
+    /* left padding for line */
     position: relative;
-    box-shadow: 2px 4px 10px rgba(0,0,0,0.4);
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.4);
     transform: rotate(var(--rotation, 0deg));
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border-radius: 3px;
     margin-bottom: 2rem;
-    
+
     background-image: linear-gradient(var(--notebook-line) 1px, transparent 1px);
     background-size: 100% 32px;
-    background-position: 0 45px; 
+    background-position: 0 45px;
 }
 
 .notebook-card::before {
     content: '';
     position: absolute;
-    top: 0; left: 45px;
-    width: 2px; height: 100%;
+    top: 0;
+    left: 45px;
+    width: 2px;
+    height: 100%;
     background-color: rgba(211, 47, 47, 0.4);
 }
 
 .notebook-card:hover {
     transform: scale(1.02) rotate(var(--rotation, 0deg));
-    box-shadow: 4px 8px 15px rgba(0,0,0,0.5);
+    box-shadow: 4px 8px 15px rgba(0, 0, 0, 0.5);
 }
 
 h1.hero-title {
@@ -140,35 +156,54 @@ h2 {
     font-size: 2rem;
     margin: 0 0 1rem 0;
     color: #111;
-    border-bottom: 2px solid rgba(0,0,0,0.2);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
     padding-bottom: 0.5rem;
 }
-.notebook-title { border-bottom: none; }
+
+.notebook-title {
+    border-bottom: none;
+}
 
 /* Push Pins */
 .push-pin {
-    width: 16px; height: 16px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     position: absolute;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.6), inset -2px -2px 4px rgba(0,0,0,0.4), inset 2px 2px 5px rgba(255,255,255,0.7);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6), inset -2px -2px 4px rgba(0, 0, 0, 0.4), inset 2px 2px 5px rgba(255, 255, 255, 0.7);
     z-index: 10;
 }
+
 .push-pin::after {
-    content: ''; position: absolute;
-    top: 2px; left: 2px; width: 5px; height: 5px;
-    background: rgba(255,255,255,0.8);
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.8);
     border-radius: 50%;
 }
-.pin-red { background-color: var(--pin-red); }
-.pin-blue { background-color: var(--pin-blue); }
-.pin-green { background-color: var(--pin-green); }
+
+.pin-red {
+    background-color: var(--pin-red);
+}
+
+.pin-blue {
+    background-color: var(--pin-blue);
+}
+
+.pin-green {
+    background-color: var(--pin-green);
+}
 
 /* Tape Strips */
 .tape-strip {
     position: absolute;
-    width: 100px; height: 25px;
+    width: 100px;
+    height: 25px;
     background: var(--tape-color);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(2px);
     z-index: 10;
     transform: rotate(var(--tape-rot, -3deg));
@@ -176,11 +211,31 @@ h2 {
     clip-path: polygon(0% 10%, 5% 0%, 20% 5%, 40% 0%, 60% 8%, 80% 0%, 100% 5%, 95% 90%, 80% 100%, 60% 95%, 40% 100%, 20% 90%, 0% 100%);
 }
 
-.top-left { top: 10px; left: 10px; }
-.top-right { top: 10px; right: 10px; }
-.top-center { top: -8px; left: 50%; transform: translateX(-50%) rotate(var(--tape-rot, -2deg)); }
-.bottom-left { bottom: 10px; left: 10px; }
-.bottom-right { bottom: 10px; right: 10px; }
+.top-left {
+    top: 10px;
+    left: 10px;
+}
+
+.top-right {
+    top: 10px;
+    right: 10px;
+}
+
+.top-center {
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%) rotate(var(--tape-rot, -2deg));
+}
+
+.bottom-left {
+    bottom: 10px;
+    left: 10px;
+}
+
+.bottom-right {
+    bottom: 10px;
+    right: 10px;
+}
 
 /* Sticky Notes (Buttons) */
 .sticky-btn {
@@ -190,32 +245,49 @@ h2 {
     color: #111;
     cursor: pointer;
     position: relative;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     transition: transform 0.1s, box-shadow 0.1s;
     transform: rotate(var(--rotation, 2deg));
     display: inline-block;
     text-align: center;
 }
+
 .sticky-btn:hover {
     transform: scale(1.05) rotate(var(--rotation, 2deg)) translateY(-2px);
-    box-shadow: 4px 4px 8px rgba(0,0,0,0.4);
-}
-.sticky-btn:active {
-    transform: scale(0.95) rotate(var(--rotation, 2deg)) translateY(1px);
-    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-}
-.sticky-btn::after {
-    /* Folded corner */
-    content: ''; position: absolute;
-    bottom: 0; right: 0;
-    border-width: 8px; border-style: solid;
-    border-color: rgba(0,0,0,0.1) var(--paper-dark) var(--paper-dark) rgba(0,0,0,0.1);
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
 }
 
-.sticky-btn.yellow { background: var(--sticky-yellow); }
-.sticky-btn.pink { background: var(--sticky-pink); }
-.sticky-btn.green { background: var(--sticky-green); }
-.sticky-btn.red { background: #ff9d9d; }
+.sticky-btn:active {
+    transform: scale(0.95) rotate(var(--rotation, 2deg)) translateY(1px);
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.sticky-btn::after {
+    /* Folded corner */
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-width: 8px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.1) var(--paper-dark) var(--paper-dark) rgba(0, 0, 0, 0.1);
+}
+
+.sticky-btn.yellow {
+    background: var(--sticky-yellow);
+}
+
+.sticky-btn.pink {
+    background: var(--sticky-pink);
+}
+
+.sticky-btn.green {
+    background: var(--sticky-green);
+}
+
+.sticky-btn.red {
+    background: #ff9d9d;
+}
 
 .massive-btn {
     font-size: 2rem;
@@ -225,28 +297,40 @@ h2 {
 }
 
 .btn-group {
-    display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
 }
-.justify-center { justify-content: center; }
+
+.justify-center {
+    justify-content: center;
+}
 
 /* Form Elements */
 .input-group {
-    display: flex; flex-direction: column; gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
+
 .input-handdrawn {
     background: transparent;
     border: none;
-    border-bottom: 2px dashed rgba(0,0,0,0.5);
+    border-bottom: 2px dashed rgba(0, 0, 0, 0.5);
     font-size: 1.5rem;
     color: #111;
-    caret-color: #d32f2f; /* Red push-pin color for the cursor so it pops */
+    caret-color: #d32f2f;
+    /* Red push-pin color for the cursor so it pops */
     padding: 0.2rem;
     outline: none;
     width: 100%;
 }
+
 .input-handdrawn:focus {
     border-bottom-style: solid;
 }
+
 select.input-handdrawn {
     appearance: none;
     cursor: pointer;
@@ -254,24 +338,48 @@ select.input-handdrawn {
 
 /* Specific BPM / Speed Stats */
 .stats-container {
-    display: flex; gap: 2rem; margin-top: 2rem; justify-content: center;
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    justify-content: center;
 }
-.stat-box { display: flex; flex-direction: column; align-items: center; }
-.stat-label { font-size: 1.3rem; color: #444; }
+
+.stat-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-label {
+    font-size: 1.3rem;
+    color: #444;
+}
+
 .stat-value {
     font-size: 2.2rem;
     font-weight: bold;
     color: #111;
-    background: rgba(0,0,0,0.05);
+    background: rgba(0, 0, 0, 0.05);
     padding: 0.2rem 0.6rem;
     border-radius: 4px;
-    border: 1px solid rgba(0,0,0,0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.text-center { text-align: center; }
-.text-sm { font-size: 1.1rem; }
-.mt-4 { margin-top: 1.5rem; }
-.mt-2 { margin-top: 0.8rem; }
+.text-center {
+    text-align: center;
+}
+
+.text-sm {
+    font-size: 1.1rem;
+}
+
+.mt-4 {
+    margin-top: 1.5rem;
+}
+
+.mt-2 {
+    margin-top: 0.8rem;
+}
 
 /* Ghost List Styles */
 .ghost-filter-container {
@@ -279,29 +387,44 @@ select.input-handdrawn {
     overflow-y: auto;
     padding-right: 1rem;
     padding-left: 0.5rem;
-    margin-left: 15px; 
+    margin-left: 15px;
 }
-.ghost-filter-container::-webkit-scrollbar { width: 8px; }
-.ghost-filter-container::-webkit-scrollbar-track { background: transparent; }
-.ghost-filter-container::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); border-radius: 4px; }
+
+.ghost-filter-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.ghost-filter-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.ghost-filter-container::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
 
 .ghost-item {
     padding: 0.8rem 0;
     /* Use line height of notebook for matching lines if possible, or simple border */
-    border-bottom: 2px dashed rgba(0,0,0,0.1);
-    display: flex; flex-direction: column; gap: 0.2rem;
+    border-bottom: 2px dashed rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
     font-size: 1.3rem;
     line-height: 1.2;
 }
+
 .ghost-item:hover {
-    background: rgba(0,0,0,0.02);
+    background: rgba(0, 0, 0, 0.02);
     transform: translateX(4px);
 }
+
 .ghost-name {
     font-family: 'Permanent Marker', cursive;
     font-size: 1.4rem;
     color: #111;
 }
+
 .ghost-speed-wrap {
     font-family: 'Special Elite', monospace;
     font-size: 1.1rem;
@@ -348,7 +471,7 @@ select.input-handdrawn {
     color: #3b2c21;
     cursor: help;
     transition: transform 0.2s ease, color 0.2s ease;
-    filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.3));
+    filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.3));
 }
 
 .tooltip-icon:hover {
@@ -365,7 +488,7 @@ select.input-handdrawn {
     background: var(--paper-bg);
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.5);
     padding: 1rem;
-    border-radius: 2px 255px 3px 25px / 255px 5px 225px 3px; 
+    border-radius: 2px 255px 3px 25px / 255px 5px 225px 3px;
     font-size: 1.2rem;
     color: #111;
     line-height: 1.3;
