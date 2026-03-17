@@ -82,7 +82,7 @@ body {
     background-image: url('./assets/Cork-seamless.jpg');
     background-repeat: repeat;
     background-size: 500px;
-    filter: brightness(0.8) sepia(0.2);
+    filter: brightness(0.7) sepia(0.2);
 }
 
 /* Layout */
@@ -220,27 +220,46 @@ h2 {
 }
 
 .top-left {
+    top: 10px;
+    left: 10px;
+}
+.tape-strip.top-left {
     top: -5px;
     left: -15px;
 }
 
 .top-right {
+    top: 10px;
+    right: 10px;
+}
+.tape-strip.top-right {
     top: -5px;
     right: -15px;
 }
 
 .top-center {
-    top: -15px;
+    top: -8px;
     left: 50%;
     transform: translateX(-50%) rotate(var(--tape-rot, -2deg));
 }
+.tape-strip.top-center {
+    top: -15px;
+}
 
 .bottom-left {
+    bottom: 10px;
+    left: 10px;
+}
+.tape-strip.bottom-left {
     bottom: -5px;
     left: -15px;
 }
 
 .bottom-right {
+    bottom: 10px;
+    right: 10px;
+}
+.tape-strip.bottom-right {
     bottom: -5px;
     right: -15px;
 }
