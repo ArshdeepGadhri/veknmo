@@ -41,4 +41,4 @@ This tool emphasizes performance, immersion, and modern web standards:
    npm run dev
    ```
 
-> **Note on Audio:** For the Footstep Simulator to function, ensure you have a `footstep.mp3` audio file located in the `assets/` directory. 
+> **Note on Audio:** For the Footstep Simulator to function, ensure you have a `footstep.ogg` audio file located in the `assets/` directory. 
